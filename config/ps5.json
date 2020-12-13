@@ -1,0 +1,53 @@
+[
+    {
+        "website": "Amazon France",
+        "url": "https://www.amazon.fr/PlayStation-Digital-manette-DualSense-Couleur/dp/B08H93ZRK9?th=1",
+        "assertions": [
+            {
+                "status": 200
+            },
+            {
+                "selector": "#availability > span",
+                "contains": ["indisponible"]
+            }
+        ]
+    },
+    {
+        "website": "Carrefour",
+        "url": "https://www.carrefour.fr/p/console-playstation-5-edition-standard-sony-interactive-0711719395201",
+        "assertions": [
+            {
+                "selector": ".unavailable-layer__block .unavailable-layer__block--visible > div",
+                "contains": ["disponible"]
+            }
+        ]
+    },
+    {
+        "website": "Micromania",
+        "url": "https://www.micromania.fr/playstation-5-alldigital-106097.html",
+        "assertions": [
+            {
+                "status": 200
+            },
+            {
+                "selector": "p.mt-3.mb-0.text-uppercase.text-small-alt",
+                "contains": ["épuisé"]
+            }
+        ]
+    },
+    {
+        "website": "FNAC",
+        "url": "https://www.fnac.com/Console-Sony-PS5-Edition-Standard/a14119956/w-4",
+        "assertions": [
+            {
+                "status": 200
+            },
+            {
+                "selector": "span.f-buyBox-availabilityStatus-unavailable",
+                "contains": ["Indisponible"]
+            }
+        ]
+    }
+    
+
+]
