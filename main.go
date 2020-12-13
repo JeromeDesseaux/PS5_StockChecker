@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/JeromeDesseaux/scraper/notifications"
 	"github.com/JeromeDesseaux/scraper/parsers"
@@ -18,8 +19,10 @@ func main() {
 	for _, c := range config {
 		err = scraper.CheckURL(&c)
 		if err != nil {
-			fmt.Println(err)
+			if strings.Contains(err.Error(), "Impossible d'accéder") {
+				title := fmt.Sprintf("%s : Changement de statut", c.Website)
+				notifications.ShowNotification(title, "Une ou plusieurs règles ne fonctionne plus sur ce site. Allez voir, votre article est peut-être en stock !")
+			}
 		}
 	}
-	notifications.ShowNotification("Chouette", "Ca marche")
 }

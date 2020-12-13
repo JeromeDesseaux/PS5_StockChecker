@@ -28,8 +28,10 @@ func CheckURL(config *parsers.WebsiteConfig) error {
 		return err
 	}
 
-	request.Header.Add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36")
-	request.Header.Add("Accept", `text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8`)
+	request.Header.Set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:83.0) Gecko/20100101 Firefox/83.0")
+	request.Header.Set("Accept", "image/webp,*/*")
+	//request.Header.Set("Accept-Encoding", "gzip, deflate, br")
+	request.Header.Set("Accept-Language", "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3")
 
 	response, err := client.Do(request)
 	if response.StatusCode == 403 {
@@ -39,6 +41,7 @@ func CheckURL(config *parsers.WebsiteConfig) error {
 	for _, assertion := range config.Assertions {
 		if assertion.Selector != "" {
 			doc, err := goquery.NewDocumentFromReader(response.Body)
+			defer response.Body.Close()
 			if err != nil {
 				return err
 			}
